@@ -1,0 +1,37 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div id="follow-block">
+        <div id="follow-info">Followers: <span id="followers-count">{{ followers_count }}</span> Following: {{ following_count }}</div>
+        <div id="follow-button">
+            {% csrf_token %}
+            {% if user.is_authenticated and user != profile_user %}
+            <button id="follow-button-{{ profile_user.pk }}" onclick="followUser('{{ profile_user.pk }}')">
+                    {% if user in profile_user.followers.all %}
+                        Unfollow
+                    {% else %}
+                        Follow
+                    {% endif %}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="post">
+                <p class="post-info"><span class="author">{{ post.author }}</span> wrote on {{ post.created_at }}</p>
+                <p>{{ post.content }}</p>
+                <p class="toggle-like" onclick="likeUnlikePost('{{ post.pk }}', this)">
+                    {% if post.post_likes.count > 0 %}
+                    <i class="fas fa-heart" style="color: red;"></i>
+                    {% else %}
+                    <i class="fas fa-heart" style="color: #d8d9da;"></i>
+                    {% endif %}
+                    <span class="like-count">{{ post.post_likes.count }}</span>
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No posts available.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        {% if posts %}
+            <h4>Posts from the {{ following_count }} user{% if following_count > 1%}s{% endif %} I follow</h4>
+            {% for post in posts %}
+                <div class="post">
+                    <p class="post-info"><a href="{% url 'profile' post.author.pk %}"><span class="author">{{ post.author }}</span></a> wrote on {{ post.created_at }}</p>
+                    <div class="post-content" id="post-content-{{ post.pk }}">{{ post.content }}</div>
+                    <p class="toggle-like" onclick="likeUnlikePost('{{ post.pk }}', this)">
+                        {% if post.post_likes.count > 0 %}
+                        <i class="fas fa-heart" style="color: red;"></i>
+                        {% else %}
+                        <i class="fas fa-heart" style="color: #d8d9da;"></i>
+                        {% endif %}
+                        <span class="like-count">{{ post.post_likes.count }}</span>
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts available.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+#write-post, .post {
+    width: 98vw;
+    border: 1px solid #ededed;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.post-form {
+    display: block;
+}
+
+.form-element-block {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.post {
+    list-style: none;
+}
+
+.post-info {
+    font-size: smaller;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+#follow-block {
+    display: flex;
+    margin-top: 15px;
+}
+
+#follow-info {
+    margin-left: 25px;
+}
+
+#follow-button {
+    margin-left: 15px;
+}
+
+.toggle-like {
+    cursor: pointer;
+}
+
+.fa-heart {
+    color: #d8d9da;
+}
